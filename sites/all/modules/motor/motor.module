@@ -106,6 +106,7 @@ function motor_form_submit($form, &$form_state) {
   //$ewrapper->title->set($desc_ass['title']);
   $ewrapper->title->set('test');
   $ewrapper->field_time->set($form_state['values']['time']);
+  $ewrapper->field_datetime->set(strtotime(date('Y-m-d ') . $form_state['values']['time']));
   $ewrapper->field_amount->set($form_state['values']['amount']);
   if (!empty($form_state['values']['event_tid'])) {
     $ewrapper->field_event->set($form_state['values']['event_tid']);
