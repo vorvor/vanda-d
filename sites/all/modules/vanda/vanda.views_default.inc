@@ -61,12 +61,21 @@ function vanda_views_default_views() {
       'empty_column' => 0,
     ),
   );
-  /* Field: Content: time */
-  $handler->display->display_options['fields']['field_time']['id'] = 'field_time';
-  $handler->display->display_options['fields']['field_time']['table'] = 'field_data_field_time';
-  $handler->display->display_options['fields']['field_time']['field'] = 'field_time';
-  $handler->display->display_options['fields']['field_time']['label'] = '';
-  $handler->display->display_options['fields']['field_time']['element_label_colon'] = FALSE;
+  /* Field: Content: datetime */
+  $handler->display->display_options['fields']['field_datetime']['id'] = 'field_datetime';
+  $handler->display->display_options['fields']['field_datetime']['table'] = 'field_data_field_datetime';
+  $handler->display->display_options['fields']['field_datetime']['field'] = 'field_datetime';
+  $handler->display->display_options['fields']['field_datetime']['label'] = '';
+  $handler->display->display_options['fields']['field_datetime']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_datetime']['settings'] = array(
+    'format_type' => 'custom',
+    'custom_date_format' => 'm-d H:i',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
   /* Field: Content: amount */
   $handler->display->display_options['fields']['field_amount']['id'] = 'field_amount';
   $handler->display->display_options['fields']['field_amount']['table'] = 'field_data_field_amount';
@@ -80,20 +89,27 @@ function vanda_views_default_views() {
   $handler->display->display_options['fields']['field_event']['label'] = '';
   $handler->display->display_options['fields']['field_event']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_event']['type'] = 'taxonomy_term_reference_plain';
-  /* Field: Content: Edit link */
-  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['label'] = '';
-  $handler->display->display_options['fields']['edit_node']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['edit_node']['text'] = 'edit';
-  /* Field: Content: Delete link */
-  $handler->display->display_options['fields']['delete_node']['id'] = 'delete_node';
-  $handler->display->display_options['fields']['delete_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['delete_node']['field'] = 'delete_node';
-  $handler->display->display_options['fields']['delete_node']['label'] = '';
-  $handler->display->display_options['fields']['delete_node']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['delete_node']['text'] = 'delete';
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<a href="/node/[nid]/edit"  rel="lightframe">edit</a>';
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
+  $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing_1']['label'] = '';
+  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '<a href="/node/[nid]/delete"  rel="lightframe">delete</a>';
+  $handler->display->display_options['fields']['nothing_1']['element_label_colon'] = FALSE;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
