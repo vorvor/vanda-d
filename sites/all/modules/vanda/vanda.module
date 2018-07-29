@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the vanda feature.
+ */
+
+include_once 'vanda.features.inc';
