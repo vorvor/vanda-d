@@ -1,0 +1,124 @@
+<?php
+
+function motor_menu() {
+  $items = array();
+
+  $items['add-event'] = array(
+    'title' => 'Add event',
+    'description' => 'A form to mess around with.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('motor_form'),
+    'access callback' => TRUE,
+    'type'=>MENU_NORMAL_ITEM,
+    'menu_name'=>'main-menu',
+  );
+
+  return $items;
+}
+
+
+function motor_form($form, &$form_state) {
+	
+	drupal_add_js('https://code.jquery.com/jquery-1.12.3.min.js', 'external');
+	drupal_add_js('http://momentjs.com/downloads/moment-with-locales.min.js', 'external');
+	
+	drupal_add_js(drupal_get_path('module', 'motor') . '/js/bootstrap-material-datetimepicker.js');
+	drupal_add_js(drupal_get_path('module', 'motor') . '/motor.js');
+
+  
+  $form['time'] = array(
+    '#type'=>'textfield',
+    '#attributes' => array('id' => array('time')),
+  );
+
+  $form['time_buttons'] = array(
+    '#markup'=>'<div>
+				<input type="button" value="-" class="change" data-val="-1" data-dest="time">
+				<input type="button" value="+" class="change" data-val="1" data-dest="time"> 
+			</div>',
+  );
+
+  $form['amount'] = array(
+    '#type'=>'textfield',
+    '#attributes' => array('id' => array('amount')),
+  );
+
+  $form['amount_buttons'] = array(
+    '#markup'=> '<div>
+				<input type="button" value="-10" class="change" data-val="-10" data-dest="amount">
+				<input type="button" value="-5" class="change" data-val="-5" data-dest="amount">
+				<input type="button" value="-2" class="change" data-val="-2" data-dest="amount">
+				<input type="button" value="-1" class="change" data-val="-1" data-dest="amount">
+				<input type="button" value="+1" class="change" data-val="1" data-dest="amount"> 
+				<input type="button" value="+2" class="change" data-val="2" data-dest="amount">
+				<input type="button" value="+5" class="change" data-val="5" data-dest="amount">
+				<input type="button" value="+10" class="change" data-val="10" data-dest="amount">
+				<input type="button" value="reset" class="reset" data-dest="amount">
+			</div>',
+  );
+
+  $form['event'] = array(
+    '#type'=>'textfield',
+    '#attributes' => array('id' => array('event')),
+  );
+
+  $form['event_tid'] = array(
+    '#type'=>'textfield',
+    '#attributes' => array('id' => array('event-tid')),
+  );
+
+  $vocabulary = taxonomy_vocabulary_machine_name_load('events');
+  $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
+
+  $output = '';
+  foreach ($terms as $term) {
+    $output .= '<input type="button" value="" class="change-event" data-tid="'  . $term->tid .  '" data-val="' . $term->name . '" data-dest="event">';
+  }
+
+  $form['event_buttons'] = array(
+    '#markup'=> '<div>' . $output . '<input type="button" value="" class="change-event" data-val="egyéb" data-dest="event"></div>',
+  );
+
+
+  $form['submit'] = array(
+    '#type'=>'submit',
+    '#value'=>t('Save!'),
+  );
+  
+  return $form;
+}
+
+function form_example_form_validate($form, &$form_state) {
+}
+
+function motor_form_submit($form, &$form_state) {
+	$values = array(
+    'type' => 'event',
+    'uid' => 1,
+    'status' => 1,
+    'comment' => 1,
+    'promote' => 0,
+  );
+
+  $entity = entity_create('node', $values);
+  $ewrapper = entity_metadata_wrapper('node', $entity);
+
+  //$ewrapper->title->set($desc_ass['title']);
+  $ewrapper->title->set('test');
+  $ewrapper->field_time->set($form_state['values']['time']);
+  $ewrapper->field_amount->set($form_state['values']['amount']);
+  if (!empty($form_state['values']['event_tid'])) {
+    $ewrapper->field_event->set($form_state['values']['event_tid']);
+  } else {
+  	$term = new stdClass();
+	$term->name = $form_state['values']['event'];
+	$vocabulary = taxonomy_vocabulary_machine_name_load('events');
+	$term->vid = $vocabulary->vid;
+	taxonomy_term_save($term);
+  	$ewrapper->field_event->set($term->tid);
+  }
+  
+
+  $nid = $ewrapper->save();
+}
+

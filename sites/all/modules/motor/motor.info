@@ -1,0 +1,7 @@
+name = Motor
+description = Common helper functions.
+core = 7.x
+
+stylesheets[all][] = motor.css
+stylesheets[all][] = css/bootstrap-material-datetimepicker.css
+

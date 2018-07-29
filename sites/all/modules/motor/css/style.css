@@ -1,0 +1,64 @@
+
+
+body {
+	padding-top: 10px;
+	font-family: 'Roboto', sans-serif;
+	text-align: center;
+}
+
+.dtp-btn-cancel,
+.dtp-btn-ok {
+	width: 100%;
+    height: 65px;
+    background: red;
+    font-size: 2em;
+}
+
+#time, #amount, #event {
+	font-size: 3em;
+	text-align: center;
+}
+
+.change, .reset, .change-event, .submit {
+	width: 120px;
+	height: 60px;
+	font-size: 3em;
+	color: #fff;
+
+		/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#bfd255+0,8eb92a+50,72aa00+51,9ecb2d+100;Green+Gloss */
+	background: #bfd255; /* Old browsers */
+	background: -moz-linear-gradient(top, #bfd255 0%, #8eb92a 50%, #72aa00 51%, #9ecb2d 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, #bfd255 0%,#8eb92a 50%,#72aa00 51%,#9ecb2d 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, #bfd255 0%,#8eb92a 50%,#72aa00 51%,#9ecb2d 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bfd255', endColorstr='#9ecb2d',GradientType=0 ); /* IE6-9 */
+}
+
+.change-event {
+	width: auto;
+	padding:0 20px;
+}
+
+.submit {
+	width: 100%;
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffb76b+0,ffa73d+50,ff7c00+51,ff7f04+100;Orange+Gloss */
+	background: #ffb76b; /* Old browsers */
+	background: -moz-linear-gradient(top, #ffb76b 0%, #ffa73d 50%, #ff7c00 51%, #ff7f04 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, #ffb76b 0%,#ffa73d 50%,#ff7c00 51%,#ff7f04 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, #ffb76b 0%,#ffa73d 50%,#ff7c00 51%,#ff7f04 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffb76b', endColorstr='#ff7f04',GradientType=0 ); /* IE6-9 */
+}
+
+.dtp > .dtp-content {
+	max-width: none;
+	max-height: none;
+	width: 50%;
+}
+
+.dtp-select-hour-text {
+	font-size: 2em;
+}
+
+div {
+	margin: 20px 0;
+}
+
