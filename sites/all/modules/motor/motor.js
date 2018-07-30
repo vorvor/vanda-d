@@ -4,7 +4,6 @@ Drupal.behaviors.myBehavior = {
   attach: function (context, settings) {
 
   	init();
-			console.log('A');
 
 			function init() {
 				$('#time').bootstrapMaterialDatePicker
