@@ -77,7 +77,7 @@ function vanda_default_fe_block_settings() {
         'region' => 'content',
         'status' => 1,
         'theme' => 'vanda',
-        'weight' => 0,
+        'weight' => -12,
       ),
       'zen' => array(
         'region' => 'content',
@@ -153,7 +153,7 @@ function vanda_default_fe_block_settings() {
         'region' => 'content',
         'status' => 1,
         'theme' => 'vanda',
-        'weight' => 0,
+        'weight' => -11,
       ),
       'zen' => array(
         'region' => '',
