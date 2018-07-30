@@ -21,8 +21,10 @@ function motor_form($form, &$form_state) {
 	
 	//drupal_add_js('https://code.jquery.com/jquery-1.12.3.min.js', 'external');
 	drupal_add_js('http://momentjs.com/downloads/moment-with-locales.min.js', 'external');
-  drupal_add_css('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css', 'external');
+  drupal_add_js('https://code.jquery.com/ui/1.12.1/jquery-ui.js', 'external');
 
+  drupal_add_css('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css', 'external');
+  drupal_add_css('https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css', 'external');
 	
 	drupal_add_js(drupal_get_path('module', 'motor') . '/js/bootstrap-material-datetimepicker.js');
 	drupal_add_js(drupal_get_path('module', 'motor') . '/motor.js');
@@ -42,6 +44,18 @@ function motor_form($form, &$form_state) {
 			</div>',
   );
 
+  $form['hour_slider'] = array(
+    '#markup' => '<div id="slider-hour">
+      <div id="custom-handle" class="ui-slider-handle"></div>
+    </div>',
+  );
+
+  $form['min_slider'] = array(
+    '#markup' => '<div id="slider-min">
+      <div id="custom-handle" class="ui-slider-handle"></div>
+    </div>',
+  );
+
   $form['amount'] = array(
     '#type'=>'textfield',
     '#required' => TRUE,
@@ -51,13 +65,11 @@ function motor_form($form, &$form_state) {
   $form['amount_buttons'] = array(
     '#markup'=> '<div>
 				<input type="button" value="-10" class="change" data-val="-10" data-dest="amount">
-				<input type="button" value="-5" class="change" data-val="-5" data-dest="amount">
-				<input type="button" value="-2" class="change" data-val="-2" data-dest="amount">
 				<input type="button" value="-1" class="change" data-val="-1" data-dest="amount">
 				<input type="button" value="+1" class="change" data-val="1" data-dest="amount"> 
-				<input type="button" value="+2" class="change" data-val="2" data-dest="amount">
-				<input type="button" value="+5" class="change" data-val="5" data-dest="amount">
 				<input type="button" value="+10" class="change" data-val="10" data-dest="amount">
+				<input type="button" value="+100" class="change" data-val="100" data-dest="amount">
+        <input type="button" value="+1000" class="change" data-val="1000" data-dest="amount">
 				<input type="button" value="reset" class="reset" data-dest="amount">
 			</div>',
   );

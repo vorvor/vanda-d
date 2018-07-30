@@ -92,3 +92,16 @@ body.page-add-event {
   content: "\f00d";
   font-size: 30px;
 }
+
+#custom-handle {
+    width: 3em;
+    height: 1.6em;
+    top: 50%;
+    margin-top: -.8em;
+    text-align: center;
+    line-height: 1.6em;
+  }
+
+  #slider-hour, #slider-min {
+  	height: 50px;
+  }

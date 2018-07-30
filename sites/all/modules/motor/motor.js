@@ -20,6 +20,48 @@ Drupal.behaviors.myBehavior = {
 					$(this).val($(this).data('val'));
 				})
 
+				var handleHour = $("#slider-hour #custom-handle");
+			    $("#slider-hour").slider({
+			      range: "max",
+				  min: 1,
+				  max: 24,
+				  value: getHour(),
+			      create: function() {
+			        handleHour.text($(this).slider("value"));
+			      },
+			      slide: function(event, ui) {
+			        handleHour.text(ui.value);
+			      },
+			      stop: function(event, ui) {
+			      	time = $('input[name="time"]').val().split(':');
+			      	if (ui.value < 10) {
+						ui.value = '0' + ui.value;
+					}
+			      	$('input[name="time"]').val(ui.value + ':' + time[1]);
+			      }
+			    });
+
+			    var handleMin = $("#slider-min #custom-handle");
+			    $("#slider-min").slider({
+			      range: "max",
+				  min: 1,
+				  max: 59,
+				  value: getMin(),
+			      create: function() {
+			        handleMin.text($(this).slider("value"));
+			      },
+			      slide: function(event, ui) {
+			        handleMin.text(ui.value);
+			      },
+			      stop: function(event, ui) {
+			      	time = $('input[name="time"]').val().split(':');
+			      	if (ui.value < 10) {
+						ui.value = '0' + ui.value;
+					}
+			      	$('input[name="time"]').val(time[0] + ':' + ui.value);
+			      }
+			    });
+
 			}
 
 			function getNow() {
@@ -34,6 +76,26 @@ Drupal.behaviors.myBehavior = {
 				}
 				return hours +':' + minutes;
 			}
+
+			function getHour() {
+				var dt = new Date();
+				var hours = dt.getHours();
+				if (hours < 10) {
+					hours = '0' + hours;
+				}
+				
+				return hours;
+			}
+
+			function getMin() {
+				var dt = new Date();
+				var minutes = dt.getMinutes();
+				if (minutes < 10) {
+					minutes = '0' + minutes;
+				}
+				return minutes;
+			}
+
 
 			$('.change').click(function() {
 
