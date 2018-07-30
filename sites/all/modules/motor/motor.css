@@ -59,4 +59,36 @@ body.page-add-event {
 	font-size: 2em;
 }
 
+.view-events {
+	font-size: 2em;
+}
 
+.view-events .views-field-nothing-1,
+.view-events .views-field-nothing {
+	display: inline-block;
+    font: normal normal normal 20px/1 FontAwesome;
+    
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+.view-events .views-field-nothing-1 a,
+.view-events .views-field-nothing a {
+	display: block;
+  font-size: 0;
+  width:100px;
+  text-decoration: none;
+}
+
+.view-events .views-field-nothing a::before {
+  content: "\f044";
+  font-size: 30px;
+}
+
+.view-events .views-field-nothing-1 a::before {
+  content: "\f00d";
+  font-size: 30px;
+}

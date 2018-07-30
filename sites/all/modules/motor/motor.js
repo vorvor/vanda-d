@@ -14,6 +14,15 @@ Drupal.behaviors.myBehavior = {
 					format: 'HH:mm'
 				});
 
+				$('#time').val(getNow());
+				$('#amount').val(1);
+				$('input[data-dest="event"]').each(function() {
+					$(this).val($(this).data('val'));
+				})
+
+			}
+
+			function getNow() {
 				var dt = new Date();
 				var hours = dt.getHours();
 				if (hours < 10) {
@@ -23,12 +32,7 @@ Drupal.behaviors.myBehavior = {
 				if (minutes < 10) {
 					minutes = '0' + minutes;
 				}
-				$('#time').val(hours +':' + minutes);
-				$('#amount').val(1);
-				$('input[data-dest="event"]').each(function() {
-					$(this).val($(this).data('val'));
-				})
-
+				return hours +':' + minutes;
 			}
 
 			$('.change').click(function() {
@@ -37,6 +41,10 @@ Drupal.behaviors.myBehavior = {
 				console.log(dest);
 
 				if (dest == '#time') {
+					if ($(this).val() == 'now') {
+						$('#time').val(getNow());
+						return 1;
+					}
 					time = $(dest).val().split(':');
 					min = parseInt(time[1]) + parseInt($(this).data('val'));
 					if (min > 59) {

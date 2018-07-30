@@ -21,6 +21,8 @@ function motor_form($form, &$form_state) {
 	
 	//drupal_add_js('https://code.jquery.com/jquery-1.12.3.min.js', 'external');
 	drupal_add_js('http://momentjs.com/downloads/moment-with-locales.min.js', 'external');
+  drupal_add_css('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css', 'external');
+
 	
 	drupal_add_js(drupal_get_path('module', 'motor') . '/js/bootstrap-material-datetimepicker.js');
 	drupal_add_js(drupal_get_path('module', 'motor') . '/motor.js');
@@ -28,6 +30,7 @@ function motor_form($form, &$form_state) {
   
   $form['time'] = array(
     '#type'=>'textfield',
+    '#required' => TRUE,
     '#attributes' => array('id' => array('time')),
   );
 
@@ -35,12 +38,14 @@ function motor_form($form, &$form_state) {
     '#markup'=>'<div>
 				<input type="button" value="-" class="change" data-val="-1" data-dest="time">
 				<input type="button" value="+" class="change" data-val="1" data-dest="time"> 
+        <input type="button" value="now" class="change" data-dest="time">
 			</div>',
   );
 
   $form['amount'] = array(
     '#type'=>'textfield',
-    '#attributes' => array('id' => array('amount')),
+    '#required' => TRUE,
+    '#attributes' => array('id' => array('amount'), 'data-default' => array(1)),
   );
 
   $form['amount_buttons'] = array(
@@ -59,11 +64,12 @@ function motor_form($form, &$form_state) {
 
   $form['event'] = array(
     '#type'=>'textfield',
+    '#required' => TRUE,
     '#attributes' => array('id' => array('event')),
   );
 
   $form['event_tid'] = array(
-    '#type'=>'textfield',
+    '#type'=>'hidden',
     '#attributes' => array('id' => array('event-tid')),
   );
 
@@ -105,7 +111,6 @@ function motor_form_submit($form, &$form_state) {
 
   //$ewrapper->title->set($desc_ass['title']);
   $ewrapper->title->set('test');
-  $ewrapper->field_time->set($form_state['values']['time']);
   $ewrapper->field_datetime->set(strtotime(date('Y-m-d ') . $form_state['values']['time']));
   $ewrapper->field_amount->set($form_state['values']['amount']);
   if (!empty($form_state['values']['event_tid'])) {
