@@ -19,10 +19,10 @@ function motor_menu() {
 
 function motor_form($form, &$form_state) {
 	
-	drupal_add_js('https://code.jquery.com/jquery-1.12.3.min.js', 'external');
+	//drupal_add_js('https://code.jquery.com/jquery-1.12.3.min.js', 'external');
 	drupal_add_js('http://momentjs.com/downloads/moment-with-locales.min.js', 'external');
   drupal_add_js('https://code.jquery.com/ui/1.12.1/jquery-ui.js', 'external');
-  drupal_add_js(drupal_get_path('module', 'motor') . '/js/jquery.ui.touch-punch.min.js');
+  //drupal_add_js(drupal_get_path('module', 'motor') . '/js/jquery.ui.touch-punch.min.js');
   drupal_add_js('https://code.jquery.com/ui/1.12.1/jquery-ui.js', 'external');
 
 
