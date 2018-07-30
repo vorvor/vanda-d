@@ -19,7 +19,7 @@ function motor_menu() {
 
 function motor_form($form, &$form_state) {
 	
-	//drupal_add_js('https://code.jquery.com/jquery-1.12.3.min.js', 'external');
+	/*drupal_add_js('https://code.jquery.com/jquery-1.12.3.min.js', 'external');
 	drupal_add_js('http://momentjs.com/downloads/moment-with-locales.min.js', 'external');
   drupal_add_js('https://code.jquery.com/ui/1.12.1/jquery-ui.js', 'external');
   drupal_add_js('sites/all/libraries/jquery.ui.touch-punch/js/jquery.ui.touch-punch.min.js', 'header');
@@ -30,7 +30,7 @@ function motor_form($form, &$form_state) {
   drupal_add_css('https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css', 'external');
 	
 	//drupal_add_js(drupal_get_path('module', 'motor') . '/js/bootstrap-material-datetimepicker.js');
-	drupal_add_js(drupal_get_path('module', 'motor') . '/motor.js');
+	drupal_add_js(drupal_get_path('module', 'motor') . '/motor.js');*/
 
   
   $form['time'] = array(
@@ -106,11 +106,28 @@ function motor_form($form, &$form_state) {
     '#value'=>t('Save!'),
   );
 
+  
+
+  $form['#attached']['js'][] = array(
+    'data' => 'https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js',
+    'type' => 'file', 
+  );
+
+  $form['#attached']['js'][] = array(
+    'data' => 'https://code.jquery.com/ui/1.12.1/jquery-ui.js',
+    'type' => 'file', 
+  );
+  
   $form['#attached']['js'][] = array(
     'data' => drupal_get_path('module', 'motor') . '/js/jquery.ui.touch-punch.js',
     'type' => 'file', 
-);
-  
+  );
+
+  $form['#attached']['js'][] = array(
+    'data' => drupal_get_path('module', 'motor') . '/motor.js',
+    'type' => 'file', 
+  );
+
   return $form;
 }
 
