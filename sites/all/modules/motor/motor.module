@@ -29,7 +29,7 @@ function motor_form($form, &$form_state) {
   drupal_add_css('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css', 'external');
   drupal_add_css('https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css', 'external');
 	
-	drupal_add_js(drupal_get_path('module', 'motor') . '/js/bootstrap-material-datetimepicker.js');
+	//drupal_add_js(drupal_get_path('module', 'motor') . '/js/bootstrap-material-datetimepicker.js');
 	drupal_add_js(drupal_get_path('module', 'motor') . '/motor.js');
 
   
