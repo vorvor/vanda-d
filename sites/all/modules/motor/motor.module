@@ -200,12 +200,28 @@ function motor_block_view($delta='') {
 }
 
 function motor_charts() {
-  $term = taxonomy_get_term_by_name('Sns tej');
-  $term = reset($term);
-  dpm($term);
-  $rows = views_get_view_result('event_chart', 'block');
 
+  $otuput = '';
+  $chart_themes = array('Sns tej', 'mérés', 'szájpenész');
+
+  foreach ($chart_themes as $chart_theme) {
+    $output .= motor_chart_by_event($chart_theme);
+  }
+
+  return $output;
+}
+
+function motor_chart_by_event($event) {
+
+  $output = '';
+  $term = taxonomy_get_term_by_name($event);
+  $term = reset($term);
+
+  $rows = views_get_view_result('event_chart', 'block', array($term->tid));
+
+  dpm($term->tid);
   $data = [];
+  $max = 0;
   foreach ($rows as $row) {
     $key = date('Y-m-d', $row->field_field_datetime[0]['raw']['value']);
     if (isset($data[$key])) {
@@ -214,13 +230,19 @@ function motor_charts() {
     else {
       $data[$key] = $row->field_field_amount[0]['raw']['value'];
     }
+    if ($data[$key] > $max) {
+      $max = $data[$key];
+    }
   }
 
-  $output = '';
+  dpm($data);
+  $e = 100 / $max;
+
+  $output = '<div style="margin-top: 150px"><h2>' . $term->name . '</h2>';
   foreach ($data as $date=>$amount) {
     $block = '<div class="cblock">
       <div class="cblock-top">
-        <div class="cblock-bar" style="height:' . ($amount) . 'px">' . $amount . '</div>
+        <div class="cblock-bar" style="height:' . ($amount * $e) . 'px">' . $amount . '</div>
       </div>
       <div class="cblock-bottom"><span>' . $date . '</span></div>
     </div>';
@@ -229,7 +251,7 @@ function motor_charts() {
 
     $output .= $block;
   }
-  dpm($output);
+  $output .= '</div><div style="clear:both"></div>';
 
   return $output;
 }

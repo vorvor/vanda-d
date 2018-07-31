@@ -107,7 +107,7 @@ body.page-add-event #motor-form {
   }
 
   #block-motor-charts {
-  	overflow: -webkit-paged-x;
+
   }
 
   .cblock {
@@ -128,7 +128,7 @@ body.page-add-event #motor-form {
   	width: 20px;
 	height: 220px;
 	position: relative;
-  	
+  	margin-top: 15px;
   }
 
   .cblock-bottom span {
