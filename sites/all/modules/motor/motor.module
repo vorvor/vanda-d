@@ -178,3 +178,71 @@ function motor_form_submit($form, &$form_state) {
   $nid = $ewrapper->save();
 }
 
+function motor_block_info() {
+  $blocks = array();
+  $blocks['charts'] = array(
+    'info' => t('Charts'),
+  );
+  
+  return $blocks;
+}
+
+function motor_block_view($delta='') {
+  $block = array();
+  
+  switch($delta) {
+    case 'charts' :
+      $block['content'] = motor_charts();
+      break;
+  }
+  
+  return $block;
+}
+
+function motor_charts() {
+  $term = taxonomy_get_term_by_name('mérés');
+  $term = reset($term);
+  dpm($term);
+  $rows = views_get_view_result('event_chart', 'block');
+
+  $data = [];
+  foreach ($rows as $row) {
+    $key = date('Y-m-d', $row->field_field_datetime[0]['raw']['value']);
+    if (isset($data[$key])) {
+      $data[$key] += $row->field_field_amount[0]['raw']['value'];
+    }    
+    else {
+      $data[$key] = $row->field_field_amount[0]['raw']['value'];
+    }
+  }
+
+  $output = '';
+  foreach ($data as $date=>$amount) {
+    $block = '<div class="cblock">
+      <div class="cblock-top">
+        <div class="cblock-bar" style="height:' . ($amount/100) . 'px"></div>
+      </div>
+      <div class="cblock-bottom"><span>' . $date . '</span></div>
+    </div>';
+
+
+
+    $output .= $block;
+  }
+  dpm($output);
+
+  return $output;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

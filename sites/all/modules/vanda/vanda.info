@@ -42,6 +42,7 @@ features[variable][] = node_submitted_event
 features[variable][] = site_frontpage
 features[variable][] = theme_default
 features[variable][] = theme_vanda_settings
+features[views_view][] = event_chart
 features[views_view][] = events
 features_exclude[dependencies][ctools] = ctools
 features_exclude[dependencies][options] = options

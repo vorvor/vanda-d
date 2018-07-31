@@ -1,6 +1,6 @@
 
 
-body.page-add-event {
+body.page-add-event #motor-form {
 	padding-top: 10px;
 	font-family: 'Roboto', sans-serif;
 	text-align: center;
@@ -104,4 +104,47 @@ body.page-add-event {
 
   #slider-hour, #slider-min {
   	height: 50px;
+  }
+
+  #block-motor-charts {
+  	overflow: -webkit-paged-x;
+  }
+
+  .cblock {
+  	w idth: 30px;
+  	height: 100px;
+
+  	float: left;
+  }
+
+  .cblock-top {
+  	w idth: 30px;
+  	height: 80px;
+
+  	position: relative;
+  }
+
+  .cblock-bottom {
+  	width: 20px;
+	height: 220px;
+	position: relative;
+  	
+  }
+
+  .cblock-bottom span {
+  	transform: rotate(90deg);
+    display: block;
+    width: 100px;
+    position: absolute;
+    top: 49px;
+    left: -37px;
+  }
+
+  .cblock-bar {
+  	position: absolute;
+  	bottom: 0;
+  	width: 5px;
+  	height: 20px;
+  	background: red;
+	left: 50%;
   }
