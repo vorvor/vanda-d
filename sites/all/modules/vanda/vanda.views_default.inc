@@ -73,6 +73,14 @@ function vanda_views_default_views() {
   $handler->display->display_options['sorts']['field_datetime_value']['id'] = 'field_datetime_value';
   $handler->display->display_options['sorts']['field_datetime_value']['table'] = 'field_data_field_datetime';
   $handler->display->display_options['sorts']['field_datetime_value']['field'] = 'field_datetime_value';
+  /* Contextual filter: Content: event (field_event) */
+  $handler->display->display_options['arguments']['field_event_tid']['id'] = 'field_event_tid';
+  $handler->display->display_options['arguments']['field_event_tid']['table'] = 'field_data_field_event';
+  $handler->display->display_options['arguments']['field_event_tid']['field'] = 'field_event_tid';
+  $handler->display->display_options['arguments']['field_event_tid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['field_event_tid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_event_tid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_event_tid']['summary_options']['items_per_page'] = '25';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
