@@ -220,7 +220,7 @@ function motor_charts() {
   foreach ($data as $date=>$amount) {
     $block = '<div class="cblock">
       <div class="cblock-top">
-        <div class="cblock-bar" style="height:' . ($amount/100) . 'px">' . $amount . '</div>
+        <div class="cblock-bar" style="height:' . ($amount) . 'px">' . $amount . '</div>
       </div>
       <div class="cblock-bottom"><span>' . $date . '</span></div>
     </div>';
