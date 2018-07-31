@@ -203,7 +203,7 @@ function motor_charts() {
 
   $otuput = '';
   $chart_themes = array('Sns tej', 'mérés', 'szájpenész');
-
+  $output = '';
   foreach ($chart_themes as $chart_theme) {
     $output .= motor_chart_by_event($chart_theme);
   }
