@@ -52,6 +52,44 @@ function vanda_default_fe_block_settings() {
     'visibility' => 0,
   );
 
+  $export['motor-charts'] = array(
+    'cache' => 1,
+    'custom' => 0,
+    'delta' => 'charts',
+    'module' => 'motor',
+    'node_types' => array(),
+    'pages' => '',
+    'roles' => array(),
+    'themes' => array(
+      'bartik' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'bartik',
+        'weight' => 0,
+      ),
+      'seven' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+      'vanda' => array(
+        'region' => 'content',
+        'status' => 1,
+        'theme' => 'vanda',
+        'weight' => 0,
+      ),
+      'zen' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'zen',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '',
+    'visibility' => 0,
+  );
+
   $export['system-main'] = array(
     'cache' => -1,
     'custom' => 0,
