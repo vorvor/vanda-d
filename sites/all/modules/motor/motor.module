@@ -200,7 +200,7 @@ function motor_block_view($delta='') {
 }
 
 function motor_charts() {
-  $term = taxonomy_get_term_by_name('mérés');
+  $term = taxonomy_get_term_by_name('Sns tej');
   $term = reset($term);
   dpm($term);
   $rows = views_get_view_result('event_chart', 'block');
@@ -220,7 +220,7 @@ function motor_charts() {
   foreach ($data as $date=>$amount) {
     $block = '<div class="cblock">
       <div class="cblock-top">
-        <div class="cblock-bar" style="height:' . ($amount/100) . 'px"></div>
+        <div class="cblock-bar" style="height:' . ($amount/100) . 'px">' . $amount . '</div>
       </div>
       <div class="cblock-bottom"><span>' . $date . '</span></div>
     </div>';

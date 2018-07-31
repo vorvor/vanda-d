@@ -138,6 +138,7 @@ body.page-add-event #motor-form {
     position: absolute;
     top: 49px;
     left: -37px;
+
   }
 
   .cblock-bar {
@@ -147,4 +148,5 @@ body.page-add-event #motor-form {
   	height: 20px;
   	background: red;
 	left: 50%;
+	font-size: 12px;
   }
