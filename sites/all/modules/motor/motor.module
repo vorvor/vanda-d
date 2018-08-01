@@ -5,9 +5,19 @@ function motor_menu() {
 
   $items['add-event'] = array(
     'title' => 'Add event',
-    'description' => 'A form to mess around with.',
+    'description' => 'Base functionality - add event.',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('motor_form'),
+    'access callback' => TRUE,
+    'type'=>MENU_NORMAL_ITEM,
+    'menu_name'=>'main-menu',
+  );
+
+  $items['add-todo'] = array(
+    'title' => 'TODO',
+    'description' => 'Add todo list item.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('motor_todo_form'),
     'access callback' => TRUE,
     'type'=>MENU_NORMAL_ITEM,
     'menu_name'=>'main-menu',
@@ -30,11 +40,11 @@ function motor_form($form, &$form_state) {
 	
 	
 	//drupal_add_js(drupal_get_path('module', 'motor') . '/motor.js');
-  drupal_add_js(drupal_get_path('module', 'motor') . '/js/bootstrap-material-datetimepicker.js');
+  //drupal_add_js(drupal_get_path('module', 'motor') . '/js/bootstrap-material-datetimepicker.js');
 
   drupal_add_css('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css', 'external');
   drupal_add_css('https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css', 'external');
-  drupal_add_css(drupal_get_path('module', 'motor') . '/js/bootstrap-material-datetimepicker.css');
+  //drupal_add_css(drupal_get_path('module', 'motor') . '/js/bootstrap-material-datetimepicker.css');
 
 
 
@@ -265,9 +275,43 @@ function motor_chart_by_event($event) {
   return $output;
 }
 
+function motor_todo_form($form, &$form_state) {
+  $form['title'] = array(
+    '#type'=>'textfield',
+    '#required' => TRUE,
+    '#attributes' => array('id' => array('title')),
+  );
 
+  $form['submit'] = array(
+    '#type'=>'submit',
+    '#value'=>t('Save!'),
+  );
 
+  $form['#attached']['js'][] = array(
+    'data' => drupal_get_path('module', 'motor') . '/motor-todo.js',
+    'type' => 'file', 
+  );
 
+  return $form;
+
+}
+
+function motor_todo_form_submit($form, &$form_state) {
+  $values = array(
+    'type' => 'todo',
+    'uid' => 1,
+    'status' => 1,
+    'comment' => 1,
+    'promote' => 0,
+  );
+
+  $entity = entity_create('node', $values);
+  $ewrapper = entity_metadata_wrapper('node', $entity);
+
+  $ewrapper->title->set($form_state['values']['title']);
+
+  $nid = $ewrapper->save();
+}
 
 
 

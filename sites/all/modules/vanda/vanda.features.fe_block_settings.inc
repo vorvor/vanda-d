@@ -77,7 +77,7 @@ function vanda_default_fe_block_settings() {
         'region' => 'content',
         'status' => 1,
         'theme' => 'vanda',
-        'weight' => 0,
+        'weight' => -10,
       ),
       'zen' => array(
         'region' => '',
@@ -115,7 +115,7 @@ function vanda_default_fe_block_settings() {
         'region' => 'content',
         'status' => 1,
         'theme' => 'vanda',
-        'weight' => -12,
+        'weight' => -13,
       ),
       'zen' => array(
         'region' => 'content',
@@ -166,6 +166,44 @@ function vanda_default_fe_block_settings() {
     'visibility' => 0,
   );
 
+  $export['views-event_chart-block'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'delta' => 'event_chart-block',
+    'module' => 'views',
+    'node_types' => array(),
+    'pages' => '',
+    'roles' => array(),
+    'themes' => array(
+      'bartik' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'bartik',
+        'weight' => 0,
+      ),
+      'seven' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+      'vanda' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'vanda',
+        'weight' => 0,
+      ),
+      'zen' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'zen',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '',
+    'visibility' => 0,
+  );
+
   $export['views-events-block'] = array(
     'cache' => -1,
     'custom' => 0,
@@ -202,6 +240,44 @@ function vanda_default_fe_block_settings() {
     ),
     'title' => '',
     'visibility' => 1,
+  );
+
+  $export['views-todo_list-block'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'delta' => 'todo_list-block',
+    'module' => 'views',
+    'node_types' => array(),
+    'pages' => 'add-todo',
+    'roles' => array(),
+    'themes' => array(
+      'bartik' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'bartik',
+        'weight' => 0,
+      ),
+      'seven' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+      'vanda' => array(
+        'region' => 'content',
+        'status' => 1,
+        'theme' => 'vanda',
+        'weight' => -12,
+      ),
+      'zen' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'zen',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '',
+    'visibility' => 0,
   );
 
   return $export;
