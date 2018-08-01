@@ -224,7 +224,7 @@ function motor_chart_by_event($event) {
   $max = 0;
   foreach ($rows as $row) {
     $key = date('Y-m-d', $row->field_field_datetime[0]['raw']['value']);
-    if (isset($data[$key])) {
+    if (isset($data[$key]) && $event !== "mérés") {
       $data[$key] += $row->field_field_amount[0]['raw']['value'];
     }    
     else {
@@ -242,7 +242,7 @@ function motor_chart_by_event($event) {
   foreach ($data as $date=>$amount) {
     $block = '<div class="cblock">
       <div class="cblock-top">
-        <div class="cblock-bar" style="height:' . ($amount * $e) . 'px">' . $amount . '</div>
+        <div class="cblock-bar" style="height:' . ($amount * $e) . 'px"><span>' . $amount . '</span></div>
       </div>
       <div class="cblock-bottom"><span>' . $date . '</span></div>
     </div>';

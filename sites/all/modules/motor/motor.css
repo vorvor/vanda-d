@@ -125,7 +125,7 @@ body.page-add-event #motor-form {
   }
 
   .cblock-bottom {
-  	width: 20px;
+  	width: 40px;
 	height: 220px;
 	position: relative;
   	margin-top: 15px;
@@ -148,5 +148,13 @@ body.page-add-event #motor-form {
   	height: 20px;
   	background: red;
 	left: 50%;
-	font-size: 12px;
+	font-size: 10px;
+  }
+
+  .cblock-bar span {
+  	background: black;
+  	padding: 0px 5px;
+  	color: #fff;
+  	display: inline-block;
+  	margin-top: 7px;
   }
