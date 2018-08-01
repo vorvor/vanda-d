@@ -81,6 +81,7 @@ function vanda_views_default_views() {
   $handler->display->display_options['arguments']['field_event_tid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_event_tid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_event_tid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['field_event_tid']['break_phrase'] = TRUE;
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';

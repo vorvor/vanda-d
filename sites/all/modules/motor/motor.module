@@ -202,11 +202,10 @@ function motor_block_view($delta='') {
 function motor_charts() {
 
   $otuput = '';
-  $chart_themes = array('Sns tej', 'mérés', 'szájpenész');
-  $output = '';
-  foreach ($chart_themes as $chart_theme) {
-    $output .= motor_chart_by_event($chart_theme);
-  }
+  
+  $output .= motor_chart_by_event(array('Sns tej', 'táp'));
+  $output .= motor_chart_by_event('mérés');
+  $output .= motor_chart_by_event('szájpenész');
 
   return $output;
 }
@@ -214,10 +213,22 @@ function motor_charts() {
 function motor_chart_by_event($event) {
 
   $output = '';
-  $term = taxonomy_get_term_by_name($event);
-  $term = reset($term);
+  if (is_array($event)) {
+    $tids = '';
+    foreach ($event as $item) {
+      $term = taxonomy_get_term_by_name($item);
+      $term = reset($term);
+      $tids[] = $term->tid;
+    }
+    $efilter = implode('+', $tids);
+  }
+  else {
+    $term = taxonomy_get_term_by_name($event);
+    $term = reset($term);
+    $efilter = $term->tid;
+  }
 
-  $rows = views_get_view_result('event_chart', 'block', $term->tid);
+  $rows = views_get_view_result('event_chart', 'block', $efilter);
 
   $data = [];
   $max = 0;
