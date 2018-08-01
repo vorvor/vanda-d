@@ -201,7 +201,7 @@ function motor_block_view($delta='') {
 
 function motor_charts() {
 
-  $otuput = '';
+  $output = '';
   
   $output .= motor_chart_by_event(array('Sns tej', 'táp'));
   $output .= motor_chart_by_event('mérés');
@@ -214,18 +214,20 @@ function motor_chart_by_event($event) {
 
   $output = '';
   if (is_array($event)) {
-    $tids = '';
     foreach ($event as $item) {
       $term = taxonomy_get_term_by_name($item);
       $term = reset($term);
       $tids[] = $term->tid;
+      $names[] = $term->name;
     }
     $efilter = implode('+', $tids);
+    $label = implode(', ', $names);
   }
   else {
     $term = taxonomy_get_term_by_name($event);
     $term = reset($term);
     $efilter = $term->tid;
+    $label = $term->name;
   }
 
   $rows = views_get_view_result('event_chart', 'block', $efilter);
@@ -247,7 +249,7 @@ function motor_chart_by_event($event) {
 
   $e = 100 / $max;
 
-  $output = '<div style="margin-top: 150px"><h2>' . $term->name . '</h2>';
+  $output = '<div style="margin-top: 150px"><h2>' . $label . '</h2>';
   foreach ($data as $date=>$amount) {
     $block = '<div class="cblock">
       <div class="cblock-top">
@@ -255,8 +257,6 @@ function motor_chart_by_event($event) {
       </div>
       <div class="cblock-bottom"><span>' . $date . '</span></div>
     </div>';
-
-
 
     $output .= $block;
   }
