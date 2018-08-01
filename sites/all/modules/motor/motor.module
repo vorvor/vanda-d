@@ -217,9 +217,8 @@ function motor_chart_by_event($event) {
   $term = taxonomy_get_term_by_name($event);
   $term = reset($term);
 
-  $rows = views_get_view_result('event_chart', 'block', array($term->tid));
+  $rows = views_get_view_result('event_chart', 'block', $term->tid);
 
-  dpm($term->tid);
   $data = [];
   $max = 0;
   foreach ($rows as $row) {
@@ -235,7 +234,6 @@ function motor_chart_by_event($event) {
     }
   }
 
-  dpm($data);
   $e = 100 / $max;
 
   $output = '<div style="margin-top: 150px"><h2>' . $term->name . '</h2>';

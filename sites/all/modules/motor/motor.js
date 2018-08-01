@@ -6,12 +6,12 @@ Drupal.behaviors.myBehavior = {
   	init();
 
 			function init() {
-				$('#time').bootstrapMaterialDatePicker
+				/*$('#time').bootstrapMaterialDatePicker
 				({
 					date: false,
 					shortTime: false,
 					format: 'HH:mm'
-				});
+				});*/
 
 				$('#time').val(getNow());
 				$('#amount').val(1);
