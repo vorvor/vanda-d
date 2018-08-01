@@ -142,6 +142,43 @@ function vanda_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-todo-field_todo'.
+  $field_instances['node-todo-field_todo'] = array(
+    'bundle' => 'todo',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'mytinytodo',
+        'settings' => array(),
+        'type' => 'mytinytodo_formatter',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_todo',
+    'label' => 'todo',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'mytinytodo',
+      'settings' => array(),
+      'type' => 'mytinytodo_widget',
+      'weight' => -4,
+    ),
+  );
+
   // Exported field_instance: 'taxonomy_term-events-field_type'.
   $field_instances['taxonomy_term-events-field_type'] = array(
     'bundle' => 'events',
@@ -183,6 +220,7 @@ function vanda_field_default_field_instances() {
   t('amount');
   t('datetime');
   t('event');
+  t('todo');
 
   return $field_instances;
 }
