@@ -39,6 +39,9 @@ function motor_menu() {
 function motor_cron() {
   global $user;
 
+  $now = date('H');
+
+  // Send mail about daily todo not passed.
   $query = new EntityFieldQuery();
   $query->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'todo')
@@ -62,8 +65,38 @@ function motor_cron() {
            'headers'=>'simple',
      );
      $to = "vorosborisz@gmail.com";
-    drupal_mail('motor', 'send_link', $to, language_default(), $params, 'demo@demo.com', TRUE);
+    drupal_mail('motor', 'send_link', $to, language_default(), $params, 'vanda@vivaretina.com', TRUE);
   } 
+
+  // Reset daily todos at midnight.
+  if ($now >= 23) {
+    $query = new EntityFieldQuery();
+    $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'todo')
+      ->propertyCondition('status', NODE_PUBLISHED)
+      //->fieldCondition('field_per_day', 'value', '1', '=')
+      ->fieldCondition('field_status', 'value', '0', '=')
+      ->addMetaData('account', user_load(1));
+
+    $result = $query->execute();
+    if (isset($result['node'])) {
+      $node_nids = array_keys($result['node']);
+      $nodes = entity_load('node', $node_nids);
+      foreach ($nodes as $node) {
+        $node_wrapper = entity_metadata_wrapper('node', $node);
+        $perday = $node_wrapper->field_per_day->value();
+        if ($perday == 1) {
+          $node_wrapper->field_status->set(0);
+          $node_wrapper->save();
+          watchdog('vanda', 'set back: ' . $node->nid . ' - ' . $node->title);
+        } else {
+          watchdog('vanda', 'deleted: ' . $node->nid . ' - ' . $node->title);
+          node_delete($node->nid);
+        }
+      }
+
+    }
+  }
 }
 
 function motor_form($form, &$form_state) {
@@ -385,16 +418,14 @@ function motor_todo_form_submit($form, &$form_state) {
 
 }
 
-function motor_mail($key,&$message,$params) 
-{
-
-       switch ($key) {
-             case 'send_link':
-                  $message['subject']=t($params['subject']);
-                  $message['body'][]=$params['body'];
-                  $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
-       break;
-          }
+function motor_mail($key,&$message,$params) {
+  switch ($key) {
+    case 'send_link':
+      $message['subject']=t($params['subject']);
+      $message['body'][]=$params['body'];
+      $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
+      break;
+  }
  }
 
 function motor_pass_todo($nid, $state) {
