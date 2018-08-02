@@ -280,6 +280,8 @@ function vanda_views_default_views() {
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
@@ -295,6 +297,21 @@ function vanda_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Deadline */
+  $handler->display->display_options['fields']['field_deadline']['id'] = 'field_deadline';
+  $handler->display->display_options['fields']['field_deadline']['table'] = 'field_data_field_deadline';
+  $handler->display->display_options['fields']['field_deadline']['field'] = 'field_deadline';
+  $handler->display->display_options['fields']['field_deadline']['label'] = '';
+  $handler->display->display_options['fields']['field_deadline']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_deadline']['settings'] = array(
+    'format_type' => 'custom',
+    'custom_date_format' => 'Y-m-d H:i',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
   /* Field: Content: Status */
   $handler->display->display_options['fields']['field_status']['id'] = 'field_status';
   $handler->display->display_options['fields']['field_status']['table'] = 'field_data_field_status';
@@ -302,6 +319,12 @@ function vanda_views_default_views() {
   $handler->display->display_options['fields']['field_status']['label'] = '';
   $handler->display->display_options['fields']['field_status']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_status']['type'] = 'list_key';
+  /* Field: Content: Per day */
+  $handler->display->display_options['fields']['field_per_day']['id'] = 'field_per_day';
+  $handler->display->display_options['fields']['field_per_day']['table'] = 'field_data_field_per_day';
+  $handler->display->display_options['fields']['field_per_day']['field'] = 'field_per_day';
+  $handler->display->display_options['fields']['field_per_day']['label'] = '';
+  $handler->display->display_options['fields']['field_per_day']['element_label_colon'] = FALSE;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';

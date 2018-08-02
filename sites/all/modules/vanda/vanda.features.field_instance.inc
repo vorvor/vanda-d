@@ -237,6 +237,49 @@ function vanda_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-todo-field_per_day'.
+  $field_instances['node-todo-field_per_day'] = array(
+    'bundle' => 'todo',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 4,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_per_day',
+    'label' => 'Per day',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 0,
+    ),
+  );
+
   // Exported field_instance: 'node-todo-field_status'.
   $field_instances['node-todo-field_status'] = array(
     'bundle' => 'todo',
@@ -275,6 +318,43 @@ function vanda_field_default_field_instances() {
       'settings' => array(),
       'type' => 'options_select',
       'weight' => -1,
+    ),
+  );
+
+  // Exported field_instance: 'node-todo-field_todo'.
+  $field_instances['node-todo-field_todo'] = array(
+    'bundle' => 'todo',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'mytinytodo',
+        'settings' => array(),
+        'type' => 'mytinytodo_formatter',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_todo',
+    'label' => 'todo',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'mytinytodo',
+      'settings' => array(),
+      'type' => 'mytinytodo_widget',
+      'weight' => -4,
     ),
   );
 
@@ -363,12 +443,14 @@ function vanda_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Deadline');
   t('Note');
+  t('Per day');
   t('Status');
   t('Type');
   t('Weight');
   t('amount');
   t('datetime');
   t('event');
+  t('todo');
 
   return $field_instances;
 }
