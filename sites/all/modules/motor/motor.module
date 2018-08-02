@@ -23,6 +23,16 @@ function motor_menu() {
     'menu_name'=>'main-menu',
   );
 
+  $items['ajax/pass-todo/%/%'] = array(
+    'title' => 'TODO',
+    'description' => 'Add todo list item.',
+    'page callback' => 'motor_pass_todo',
+    'page arguments' => array(2,3),
+    'access callback' => TRUE,
+    'type'=>MENU_NORMAL_ITEM,
+    'menu_name'=>'main-menu',
+  );
+
   return $items;
 }
 
@@ -313,7 +323,14 @@ function motor_todo_form_submit($form, &$form_state) {
   $nid = $ewrapper->save();
 }
 
+function motor_pass_todo($nid, $state) {
+  $entity = node_load($nid);
+  $ewrapper = entity_metadata_wrapper('node', $entity);
+  $ewrapper->field_status->set($state);
+  $ewrapper->save(); 
 
+  return 'A:' . $ewrapper->field_status->value();
+}
 
 
 
