@@ -36,6 +36,35 @@ function motor_menu() {
   return $items;
 }
 
+function motor_cron() {
+  global $user;
+
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'todo')
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->fieldCondition('field_per_day', 'value', '1', '=')
+    ->fieldCondition('field_status', 'value', '1', '=')
+    ->addMetaData('account', user_load(1));
+
+  $result = $query->execute();
+  if (isset($result['node'])) {
+    $node_nids = array_keys($result['node']);
+    $nodes = entity_load('node', $node_nids);
+    foreach ($nodes as $node) {
+      $titles[] = $node->title;
+    }
+
+  $message = implode(', ', $titles);;
+  $params = array(
+           'body' => $message,
+           'subject' => 'daily todo',
+           'headers'=>'simple',
+     );
+     $to = "vorosborisz@gmail.com";
+    drupal_mail('motor', 'send_link', $to, language_default(), $params, 'demo@demo.com', TRUE);
+  } 
+}
 
 function motor_form($form, &$form_state) {
 	
@@ -223,7 +252,7 @@ function motor_charts() {
 
   $output = '';
   
-  $output .= motor_chart_by_event(array('Sns tej', 'táp'));
+  $output .= motor_chart_by_event(array('Sns tej', 'táp', 'anyatej'));
   $output .= motor_chart_by_event('mérés');
   $output .= motor_chart_by_event('szájpenész');
 
@@ -286,10 +315,35 @@ function motor_chart_by_event($event) {
 }
 
 function motor_todo_form($form, &$form_state) {
+  
   $form['title'] = array(
     '#type'=>'textfield',
     '#required' => TRUE,
     '#attributes' => array('id' => array('title')),
+  );
+
+  $form['daily'] = array(
+    '#title'=>'Daily',
+    '#type'=>'checkbox',
+  );
+
+  $form['datetime'] = array(
+    '#type' => 'date_popup',
+    // Use 'timepicker' option provided by the Date Popup Timepicker module.
+    // #timepicker property itself is provided by the Date Popup module.
+    '#timepicker' => 'timepicker',
+    // New #timepicker_options property handled by the Date Popup Timepicker
+    // module and lets to customize timepicker options.
+    '#timepicker_options' => array(
+      'rows' => 6,
+      'minutes' => array(
+        'starts' => 0,
+        'ends' => 56,
+        'interval' => 4,
+      ),
+      'showCloseButton' => TRUE,
+      'closeButtonText' => t('Close'),
+    ),
   );
 
   $form['submit'] = array(
@@ -307,21 +361,43 @@ function motor_todo_form($form, &$form_state) {
 }
 
 function motor_todo_form_submit($form, &$form_state) {
-  $values = array(
-    'type' => 'todo',
-    'uid' => 1,
-    'status' => 1,
-    'comment' => 1,
-    'promote' => 0,
-  );
 
-  $entity = entity_create('node', $values);
-  $ewrapper = entity_metadata_wrapper('node', $entity);
+  dpm($form_state);
 
-  $ewrapper->title->set($form_state['values']['title']);
+  if (!empty($form_state['values']['title'])) {
+    $values = array(
+      'type' => 'todo',
+      'uid' => 1,
+      'status' => 1,
+      'comment' => 1,
+      'promote' => 0,
+    );
 
-  $nid = $ewrapper->save();
+    $entity = entity_create('node', $values);
+    $ewrapper = entity_metadata_wrapper('node', $entity);
+
+    $ewrapper->title->set($form_state['values']['title']);
+    $ewrapper->field_per_day->set($form_state['values']['daily']);
+    $ewrapper->field_deadline->set(strtotime($form_state['values']['datetime']));
+
+    $nid = $ewrapper->save();
+  }
+
+  
+
 }
+
+function motor_mail($key,&$message,$params) 
+{
+
+       switch ($key) {
+             case 'send_link':
+                  $message['subject']=t($params['subject']);
+                  $message['body'][]=$params['body'];
+                  $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
+       break;
+          }
+ }
 
 function motor_pass_todo($nid, $state) {
   $entity = node_load($nid);

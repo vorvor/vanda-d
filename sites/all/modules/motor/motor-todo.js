@@ -18,6 +18,7 @@ Drupal.behaviors.myBehavior = {
   			if (state == 0) {
   				console.log(state);
   			  $(this).parent().children('.views-field-title').css("text-decoration", "line-through");
+
   			  parent = $(this).parent();
   			  $('.todo-pass',parent).attr("checked", "checked");
 
