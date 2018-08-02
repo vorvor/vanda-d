@@ -52,10 +52,10 @@ function motor_cron() {
     $node_nids = array_keys($result['node']);
     $nodes = entity_load('node', $node_nids);
     foreach ($nodes as $node) {
-      $titles[] = $node->title;
+      $todos[] = $node->title . ' - ' . $node->field_deadline[LANGUAGE_NONE][0]['value'];
     }
 
-  $message = implode(', ', $titles);;
+  $message = implode(', <br />', $todos);;
   $params = array(
            'body' => $message,
            'subject' => 'daily todo',
@@ -362,8 +362,6 @@ function motor_todo_form($form, &$form_state) {
 
 function motor_todo_form_submit($form, &$form_state) {
 
-  dpm($form_state);
-
   if (!empty($form_state['values']['title'])) {
     $values = array(
       'type' => 'todo',
@@ -404,8 +402,6 @@ function motor_pass_todo($nid, $state) {
   $ewrapper = entity_metadata_wrapper('node', $entity);
   $ewrapper->field_status->set($state);
   $ewrapper->save(); 
-
-  return 'A:' . $ewrapper->field_status->value();
 }
 
 
