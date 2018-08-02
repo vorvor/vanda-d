@@ -237,6 +237,47 @@ function vanda_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-todo-field_status'.
+  $field_instances['node-todo-field_status'] = array(
+    'bundle' => 'todo',
+    'default_value' => array(
+      0 => array(
+        'value' => 1,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 3,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_status',
+    'label' => 'Status',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => -1,
+    ),
+  );
+
   // Exported field_instance: 'node-todo-field_weight'.
   $field_instances['node-todo-field_weight'] = array(
     'bundle' => 'todo',
@@ -322,6 +363,7 @@ function vanda_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Deadline');
   t('Note');
+  t('Status');
   t('Type');
   t('Weight');
   t('amount');

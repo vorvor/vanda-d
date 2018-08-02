@@ -47,32 +47,11 @@ function vanda_menu_default_menu_links() {
     'weight' => -50,
     'customized' => 1,
   );
-  // Exported menu link: main-menu_todo:add-todo.
-  $menu_links['main-menu_todo:add-todo'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'add-todo',
-    'router_path' => 'add-todo',
-    'link_title' => 'TODO',
-    'options' => array(
-      'attributes' => array(
-        'title' => 'Add todo list item.',
-      ),
-      'identifier' => 'main-menu_todo:add-todo',
-    ),
-    'module' => 'system',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => 0,
-    'customized' => 0,
-  );
 
   // Translatables
   // Included for use with string extractors like potx.
   t('Add event');
   t('Home');
-  t('TODO');
 
   return $menu_links;
 }
