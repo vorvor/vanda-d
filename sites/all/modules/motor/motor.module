@@ -65,7 +65,8 @@ function motor_cron() {
            'headers'=>'simple',
      );
      $to = "vorosborisz@gmail.com";
-    drupal_mail('motor', 'send_link', $to, language_default(), $params, 'vanda@vivaretina.com', TRUE);
+     drupal_mail('motor', 'send_link', $to, language_default(), $params, 'vanda@vivaretina.com', TRUE);
+     //watchdog('motor', $message);
   } 
 
   // Reset daily todos at midnight.
@@ -86,7 +87,7 @@ function motor_cron() {
         $node_wrapper = entity_metadata_wrapper('node', $node);
         $perday = $node_wrapper->field_per_day->value();
         if ($perday == 1) {
-          $node_wrapper->field_status->set(0);
+          $node_wrapper->field_status->set(1);
           $node_wrapper->save();
           watchdog('vanda', 'set back: ' . $node->nid . ' - ' . $node->title);
         } else {
