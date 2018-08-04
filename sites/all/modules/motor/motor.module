@@ -56,8 +56,9 @@ function motor_cron() {
     $nodes = entity_load('node', $node_nids);
     foreach ($nodes as $node) {
       $hour = date('H', strtotime($node->field_deadline[LANGUAGE_NONE][0]['value']));
+      $hour = date('H:i', strtotime('+2 hours', $hour));
       if ($hour - $now < 1 && $hour <= $now) { 
-        $todos[] = $node->title . ' - ' . (int)$node->field_deadline[LANGUAGE_NONE][0]['value'] + 2;
+        $todos[] = $node->title . ' - ' . $hour;
       }
     }
 
