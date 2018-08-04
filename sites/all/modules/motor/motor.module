@@ -57,7 +57,7 @@ function motor_cron() {
     foreach ($nodes as $node) {
       $hour = date('H', strtotime($node->field_deadline[LANGUAGE_NONE][0]['value']));
       if ($hour - $now < 1 && $hour <= $now) { 
-        $todos[] = $node->title . ' - ' . $node->field_deadline[LANGUAGE_NONE][0]['value'];
+        $todos[] = $node->title . ' - ' . (int)$node->field_deadline[LANGUAGE_NONE][0]['value'] + 2;
       }
     }
 
@@ -68,9 +68,9 @@ function motor_cron() {
         'subject' => 'daily todo',
         'headers'=>'simple',
       );
-      $to = "vorosborisz@gmail.com";
+      $to = "vorosborisz@gmail.com,mperedy@gmail.com";
       drupal_mail('motor', 'send_link', $to, language_default(), $params, 'vanda@vivaretina.com', TRUE);
-      watchdog('motor', $message); 
+      watchdog('motor', 'mail:' . $message); 
     }
   } 
 
