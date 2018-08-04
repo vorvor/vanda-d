@@ -55,18 +55,23 @@ function motor_cron() {
     $node_nids = array_keys($result['node']);
     $nodes = entity_load('node', $node_nids);
     foreach ($nodes as $node) {
-      $todos[] = $node->title . ' - ' . $node->field_deadline[LANGUAGE_NONE][0]['value'];
+      $hour = date('H', strtotime($node->field_deadline[LANGUAGE_NONE][0]['value']));
+      if ($hour - $now < 1 && $hour <= $now) { 
+        $todos[] = $node->title . ' - ' . $node->field_deadline[LANGUAGE_NONE][0]['value'];
+      }
     }
 
-  $message = implode(', <br />', $todos);;
-  $params = array(
-           'body' => $message,
-           'subject' => 'daily todo',
-           'headers'=>'simple',
-     );
-     $to = "vorosborisz@gmail.com";
-     drupal_mail('motor', 'send_link', $to, language_default(), $params, 'vanda@vivaretina.com', TRUE);
-     //watchdog('motor', $message);
+    if (!empty($todos)) {
+      $message = implode(', <br />', $todos);;
+      $params = array(
+        'body' => $message,
+        'subject' => 'daily todo',
+        'headers'=>'simple',
+      );
+      $to = "vorosborisz@gmail.com";
+      drupal_mail('motor', 'send_link', $to, language_default(), $params, 'vanda@vivaretina.com', TRUE);
+      watchdog('motor', $message); 
+    }
   } 
 
   // Reset daily todos at midnight.
