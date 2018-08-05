@@ -4,6 +4,7 @@ Drupal.behaviors.myBehavior = {
   attach: function (context, settings) {
 
   	init();
+  	
 
   	function init() {
   		$('#draggableviews-table-todo-list-block td.views-field-nid').each(function() {
@@ -49,6 +50,8 @@ Drupal.behaviors.myBehavior = {
 		        });
   		}
   	}
+
+  	
 
   	}}
 })(jQuery);

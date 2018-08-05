@@ -33,13 +33,22 @@ function motor_menu() {
     'menu_name'=>'main-menu',
   );
 
+  $items['ajax-test'] = array(
+    'title' => 'Ajax test',
+    'description' => 'Base functionality - add event.',
+    'page callback' => 'motor_ajax_test',
+    'access callback' => TRUE,
+    'type'=>MENU_NORMAL_ITEM,
+    'menu_name'=>'main-menu',
+  );
+
   return $items;
 }
 
 function motor_cron() {
   global $user;
 
-  $now = date('H');
+  $now = date('G');
 
   // Send mail about daily todo not passed.
   $query = new EntityFieldQuery();
@@ -55,8 +64,8 @@ function motor_cron() {
     $node_nids = array_keys($result['node']);
     $nodes = entity_load('node', $node_nids);
     foreach ($nodes as $node) {
-      $hour = date('H', strtotime($node->field_deadline[LANGUAGE_NONE][0]['value']));
-      $hour = date('H:i', strtotime('+1 hours', $hour));
+      $hour = date('G', strtotime('+2 hours', strtotime($node->field_deadline[LANGUAGE_NONE][0]['value'])));
+      
       if (abs($hour - $now) <= 1) { 
         $todos[] = $node->title . ' - ' . $hour;
       }
@@ -70,7 +79,7 @@ function motor_cron() {
         'headers'=>'simple',
       );
       $to = "vorosborisz@gmail.com,mperedy@gmail.com";
-      //drupal_mail('motor', 'send_link', $to, language_default(), $params, 'vanda@vivaretina.com', TRUE);
+      drupal_mail('motor', 'send_link', $to, language_default(), $params, 'vanda@vivaretina.com', TRUE);
       watchdog('motor', 'mail:' . $message); 
     }
   } 
@@ -126,7 +135,9 @@ function motor_form($form, &$form_state) {
   //drupal_add_css(drupal_get_path('module', 'motor') . '/js/bootstrap-material-datetimepicker.css');
 
 
-
+  $form['popup-test'] = array(
+    '#markup'=>'<a href="#" data-url="/add-todo" class="popup">popup</a>',
+  );
   
   $form['time'] = array(
     '#type'=>'textfield',
@@ -450,7 +461,9 @@ function motor_pass_todo($nid, $state) {
 }
 
 
-
+function motor_ajax_test() {
+  print 'HEY!';
+}
 
 
 
