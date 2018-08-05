@@ -136,7 +136,7 @@ function motor_form($form, &$form_state) {
 
 
   $form['popup-test'] = array(
-    '#markup'=>'<a href="#" data-url="/add-todo" class="popup">popup</a>',
+    '#markup'=>'<a href="#" data-url="/ajax-test" class="popup">popup</a>',
   );
   
   $form['time'] = array(
@@ -168,17 +168,21 @@ function motor_form($form, &$form_state) {
   $form['amount'] = array(
     '#type'=>'textfield',
     '#required' => TRUE,
-    '#attributes' => array('id' => array('amount'), 'data-default' => array(1)),
+    '#attributes' => array('id' => array('amount'), 'data-default' => array()),
   );
 
   $form['amount_buttons'] = array(
-    '#markup'=> '<div>
-				<input type="button" value="-10" class="change" data-val="-10" data-dest="amount">
-				<input type="button" value="-1" class="change" data-val="-1" data-dest="amount">
-				<input type="button" value="+1" class="change" data-val="1" data-dest="amount"> 
-				<input type="button" value="+10" class="change" data-val="10" data-dest="amount">
-				<input type="button" value="+100" class="change" data-val="100" data-dest="amount">
-        <input type="button" value="+1000" class="change" data-val="1000" data-dest="amount">
+    '#markup'=> '<div id="dial">
+				<input type="button" value="1" class="change" data-val="1" data-dest="amount">
+				<input type="button" value="2" class="change" data-val="2" data-dest="amount">
+				<input type="button" value="3" class="change" data-val="3" data-dest="amount"> 
+				<input type="button" value="4" class="change" data-val="4" data-dest="amount">
+        <input type="button" value="5" class="change" data-val="5" data-dest="amount">
+        <input type="button" value="6" class="change" data-val="6" data-dest="amount">
+        <input type="button" value="7" class="change" data-val="7" data-dest="amount">
+        <input type="button" value="8" class="change" data-val="8" data-dest="amount">
+        <input type="button" value="9" class="change" data-val="9" data-dest="amount">
+        <input type="button" value="0" class="change" data-val="0" data-dest="amount">
 				<input type="button" value="reset" class="reset" data-dest="amount">
 			</div>',
   );

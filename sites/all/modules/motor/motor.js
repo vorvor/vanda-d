@@ -13,7 +13,8 @@ Drupal.behaviors.myBehavior = {
 
       $('body').append('<div id="popup-wrapper" style="width: 100%; height: 600px; background: rgba(0,0,0,0.5);position: absolute;top: 0;"><div id="popup-content" style="width:60%;height:400px;margin: 100px auto;background: #fff;"></div></div>');
       $('#popup-wrapper').hide();
-      $('.popup').click(function() {
+      $('.popup').click(function(e) {
+      	e.preventDefault();
         url = $(this).data('url');
         $.ajax
             ({ 
@@ -22,9 +23,11 @@ Drupal.behaviors.myBehavior = {
               type: 'post',
               success: function(result)
               {
-              	  console.log('hey!');
                   $('#popup-content').html('A' + result);
-                  $('#popup-wrapper').show();
+                  $('#popup-wrapper').show().click(function() {
+                  	console.log('hide');
+                  	$('#popup-wrapper').hide();
+                  });
               }
             });
 
@@ -51,7 +54,7 @@ Drupal.behaviors.myBehavior = {
 		});*/
 
 		$('#time').val(getNow());
-		$('#amount').val(1);
+		//$('#amount').val(1);
 		$('input[data-dest="event"]').each(function() {
 			$(this).val($(this).data('val'));
 		})
@@ -158,7 +161,7 @@ Drupal.behaviors.myBehavior = {
 			$(dest).val(time[0] + ':' + min);
 	    }
 	    if (dest == '#amount') {
-	    	$(dest).val(parseInt($(dest).val()) + parseInt($(this).data('val')));
+	    	$(dest).val($(dest).val() + $(this).data('val'));
 	    }
 
 

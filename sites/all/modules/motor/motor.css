@@ -6,6 +6,8 @@ body.page-add-event #motor-form {
 	text-align: center;
 }
 
+ul.menu 
+
 .dtp-btn-cancel,
 .dtp-btn-ok {
 	width: 100%;
@@ -17,6 +19,11 @@ body.page-add-event #motor-form {
 #time, #amount, #event {
 	font-size: 3em;
 	text-align: center;
+}
+
+#dial {
+  width: 400px;
+  margin: 0 auto;
 }
 
 .change, .reset, .change-event, .page-add-event .form-submit {
@@ -31,6 +38,17 @@ body.page-add-event #motor-form {
 	background: -webkit-linear-gradient(top, #bfd255 0%,#8eb92a 50%,#72aa00 51%,#9ecb2d 100%); /* Chrome10-25,Safari5.1-6 */
 	background: linear-gradient(to bottom, #bfd255 0%,#8eb92a 50%,#72aa00 51%,#9ecb2d 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bfd255', endColorstr='#9ecb2d',GradientType=0 ); /* IE6-9 */
+}
+
+.change, .reset {
+  display: block;
+  float: left;
+}
+
+.change:nth-child(4),
+.change:nth-child(7),
+.change:nth-child(10) {
+  clear: both;
 }
 
 .change-event {
