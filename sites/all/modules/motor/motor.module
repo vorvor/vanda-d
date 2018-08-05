@@ -57,20 +57,20 @@ function motor_cron() {
     foreach ($nodes as $node) {
       $hour = date('H', strtotime($node->field_deadline[LANGUAGE_NONE][0]['value']));
       $hour = date('H:i', strtotime('+1 hours', $hour));
-      if ($hour - $now < 1 && $hour <= $now) { 
+      if (abs($hour - $now) <= 1) { 
         $todos[] = $node->title . ' - ' . $hour;
       }
     }
 
     if (!empty($todos)) {
-      $message = implode(', <br />', $todos);;
+      $message = implode(', <br />', $todos);
       $params = array(
         'body' => $message,
         'subject' => 'daily todo',
         'headers'=>'simple',
       );
       $to = "vorosborisz@gmail.com,mperedy@gmail.com";
-      drupal_mail('motor', 'send_link', $to, language_default(), $params, 'vanda@vivaretina.com', TRUE);
+      //drupal_mail('motor', 'send_link', $to, language_default(), $params, 'vanda@vivaretina.com', TRUE);
       watchdog('motor', 'mail:' . $message); 
     }
   } 
@@ -237,9 +237,12 @@ function form_example_form_validate($form, &$form_state) {
 }
 
 function motor_form_submit($form, &$form_state) {
+  global $user;
+
+
 	$values = array(
     'type' => 'event',
-    'uid' => 1,
+    'uid' => $user->uid,
     'status' => 1,
     'comment' => 1,
     'promote' => 0,
@@ -322,7 +325,7 @@ function motor_chart_by_event($event) {
   $rows = views_get_view_result('event_chart', 'block', $efilter);
 
   $data = [];
-  $max = 0;
+  $max = 1;
   foreach ($rows as $row) {
     $key = date('Y-m-d', $row->field_field_datetime[0]['raw']['value']);
     if (isset($data[$key]) && $event !== "mérés") {
@@ -402,10 +405,12 @@ function motor_todo_form($form, &$form_state) {
 
 function motor_todo_form_submit($form, &$form_state) {
 
+  global $user;
+
   if (!empty($form_state['values']['title'])) {
     $values = array(
       'type' => 'todo',
-      'uid' => 1,
+      'uid' => $user->uid,
       'status' => 1,
       'comment' => 1,
       'promote' => 0,
@@ -416,7 +421,9 @@ function motor_todo_form_submit($form, &$form_state) {
 
     $ewrapper->title->set($form_state['values']['title']);
     $ewrapper->field_per_day->set($form_state['values']['daily']);
-    $ewrapper->field_deadline->set(strtotime($form_state['values']['datetime']));
+    if (!empty($form_state['values']['datetime'])) {
+      $ewrapper->field_deadline->set(strtotime($form_state['values']['datetime']));
+    }
 
     $nid = $ewrapper->save();
   }
