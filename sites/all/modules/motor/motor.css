@@ -21,6 +21,12 @@ ul.menu
 	text-align: center;
 }
 
+#time-buttons {
+  overflow: hidden;
+  padding-left: 30%;
+  margin-bottom: 20px;
+}
+
 #dial {
   width: 400px;
   margin: 0 auto;

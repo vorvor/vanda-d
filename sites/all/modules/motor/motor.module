@@ -146,7 +146,7 @@ function motor_form($form, &$form_state) {
   );
 
   $form['time_buttons'] = array(
-    '#markup'=>'<div>
+    '#markup'=>'<div id="time-buttons">
 				<input type="button" value="-" class="change" data-val="-1" data-dest="time">
 				<input type="button" value="+" class="change" data-val="1" data-dest="time"> 
         <input type="button" value="now" class="change" data-dest="time">
@@ -339,10 +339,15 @@ function motor_chart_by_event($event) {
 
   $rows = views_get_view_result('event_chart', 'block', $efilter);
 
+
   $data = [];
   $max = 1;
   foreach ($rows as $row) {
+
     $key = date('Y-m-d', $row->field_field_datetime[0]['raw']['value']);
+    if (is_array($event)) {
+      dpm(date('Y-m-d H:i', $row->field_field_datetime[0]['raw']['value']));
+    }
     if (isset($data[$key]) && $event !== "mérés") {
       $data[$key] += $row->field_field_amount[0]['raw']['value'];
     }    
