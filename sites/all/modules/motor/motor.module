@@ -34,12 +34,11 @@ function motor_menu() {
   );
 
   $items['ajax-test'] = array(
-    'title' => 'Ajax test',
+    'title' => 'Ajax testt',
     'description' => 'Base functionality - add event.',
     'page callback' => 'motor_ajax_test',
     'access callback' => TRUE,
-    'type'=>MENU_NORMAL_ITEM,
-    'menu_name'=>'main-menu',
+    'type'=>MENU_CALLBACK,
   );
 
   return $items;
@@ -345,9 +344,6 @@ function motor_chart_by_event($event) {
   foreach ($rows as $row) {
 
     $key = date('Y-m-d', $row->field_field_datetime[0]['raw']['value']);
-    if (is_array($event)) {
-      dpm(date('Y-m-d H:i', $row->field_field_datetime[0]['raw']['value']));
-    }
     if (isset($data[$key]) && $event !== "mérés") {
       $data[$key] += $row->field_field_amount[0]['raw']['value'];
     }    
