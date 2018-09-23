@@ -78,7 +78,7 @@ function motor_cron() {
         'headers'=>'simple',
       );
       $to = "vorosborisz@gmail.com,mperedy@gmail.com";
-      drupal_mail('motor', 'send_link', $to, language_default(), $params, 'vanda@vivaretina.com', TRUE);
+      //drupal_mail('motor', 'send_link', $to, language_default(), $params, 'vanda@vivaretina.com', TRUE);
       watchdog('motor', 'mail:' . $message); 
     }
   } 
